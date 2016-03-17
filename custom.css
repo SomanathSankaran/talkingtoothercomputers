@@ -1,0 +1,10 @@
+.reveal pre code{
+    font-size: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+}
+
+.inner_cell{
+  font-size: 1.5em !important;
+}
+

@@ -9,3 +9,5 @@ present: talkingtoothercomputers.slides.html
 	python -c 'import webbrowser; webbrowser.open("http://localhost:8000/talkingtoothercomputers.slides.html#/")' & python -m SimpleHTTPServer
 dev:
 	jupyter notebook talkingtoothercomputers.ipynb
+reveal.js:
+	git clone git@github.com:hakimel/reveal.js.git

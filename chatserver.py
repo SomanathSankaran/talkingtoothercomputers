@@ -1,26 +1,14 @@
-import select
 import socket
 
-server = socket.socket()
-server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server.bind(('', 1234))
-server.listen(5)
-
-clients = []
+s = socket.socket
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+# Note the double parens!
+s.bind(('localhost', 4000))
+s.listen(10)
 
 while True:
-    ready_to_read, _, _ = select.select(clients + [server], [], [])
-    for r in ready_to_read:
-        if r is server:
-            s, addr = server.accept()
-            clients.append(s)
-        else:
-            msg = r.recv(1000)
-            if not msg:
-                r.close()
-                clients.remove(r)
-                continue
-            _, ready_to_write, _ = select.select([], clients, [])
-            for client in ready_to_write:
-                if client is not r:
-                    client.send(msg)
+    new_connection, _ = s.accept()
+    new_connection.send(b'please enter joke\n')
+    msg = new_connection.recv(1000)
+    print('got incoming message:', msg)
+    new_connection.send(b'ha ha that was funny\n')
